@@ -8,5 +8,6 @@ urlpatterns = [
     path('sites/', views.sites_overview, name='sites'),
     path('mission/', views.mission, name='mission'),
     path('pyros/', views.pyros_software, name='pyros'),
+    path('quiz/', views.quiz, name='quiz'),
     path('contact/', views.contact, name='contact'),
 ]

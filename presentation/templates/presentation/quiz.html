@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quiz Spatial TAROT{% endblock %}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #e8e8e8;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+
+        /* Effet d'étoiles subtil en arrière-plan */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ffffff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header moderne et épuré */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .logo p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation épurée */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        nav a.active {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Section principale */
+        .quiz-section {
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem 0;
+        }
+
+        .content {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .quiz-title {
+            font-size: 3rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-subtitle {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(51, 65, 85, 0.6);
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: rgba(51, 65, 85, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            color: #06b6d4;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(100, 116, 139, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, 0.2);
+        }
+
+        .option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.2);
+            animation: correctPulse 0.6s ease;
+        }
+
+        .option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 12px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-play:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-play.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .start-screen, .results-screen {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-weight: bold;
+        }
+
+        .badge.expert {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .badge.advanced {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .badge.intermediate {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .badge.beginner {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .stars {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+
+        .star {
+            color: #fbbf24;
+            animation: sparkle 1s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(100, 116, 139, 0.2);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #94a3b8;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .content {
+                padding: 2rem;
+            }
+
+            .quiz-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>TAROT Network</h1>
+                    <p>Télescopes à Action Rapide pour les Objets Transitoires</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'presentation:home' %}">Accueil</a></li>
+                        <li><a href="{% url 'presentation:sites' %}">Sites</a></li>
+                        <li><a href="{% url 'presentation:mission' %}">Mission</a></li>
+                        <li><a href="{% url 'presentation:pyros' %}">PyROS</a></li>
+                        <li><a href="{% url 'presentation:quiz' %}" class="active">Quiz</a></li>
+                        <li><a href="{% url 'presentation:contact' %}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="quiz-section">
+        <div class="container">
+            <div class="content fade-in">
+                
+                <h1 class="quiz-title">Quiz Spatial TAROT</h1>
+                <p class="quiz-subtitle">Testez vos connaissances sur l'astronomie et le réseau TAROT !</p>
+                
+                <div class="quiz-container">
+                    
+                    <!-- Écran de démarrage du quiz -->
+                    <div id="quizStartScreen" class="start-screen">
+                        <h3>Explorez vos connaissances sur les télescopes robotiques</h3>
+                        <p>10 questions pour devenir un expert des télescopes TAROT</p>
+                        <button class="btn-play" onclick="startQuiz()" style="margin-top: 2rem;">Commencer le Quiz</button>
+                    </div>
+                    
+                    <!-- Zone de quiz -->
+                    <div id="quizArea" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        
+                        <div id="questionCard" class="question-card">
+                            <div class="question-number" id="questionNumber">Question 1/10</div>
+                            <div class="question-text" id="questionText"></div>
+                            <div class="options" id="optionsContainer"></div>
+                            <button class="btn-play hidden" id="nextBtn" onclick="nextQuestion()" style="margin-top: 2rem;">Question suivante</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Écran de résultats -->
+                    <div id="quizResultsScreen" class="results-screen" style="display: none;">
+                        <h2>Résultats du Quiz</h2>
+                        <div class="score-value" id="finalScore">0/10</div>
+                        <div class="stars" id="starsDisplay"></div>
+                        <div id="badgeDisplay"></div>
+                        <div id="scoreMessage"></div>
+                        <button class="btn-play" onclick="restartQuiz()" style="margin-top: 2rem;">Recommencer</button>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CNRS/IRAP - Réseau TAROT • Projet d'entretien technique</p>
+        </div>
+    </footer>
+
+    <script>
+        // QUIZ
+        const questions = [
+            {
+                question: "Que signifie l'acronyme TAROT ?",
+                options: [
+                    "Télescopes à Action Rapide pour les Objets Transitoires",
+                    "Télescopes Automatiques de Recherche d'Objets Temporaires",
+                    "Système de Télescopes Automatisés pour la Recherche",
+                    "Télescopes d'Analyse Rapide d'Objets Temporaires"
+                ],
+                correct: 0
+            },
+            {
+                question: "Combien de télescopes composent le réseau TAROT ?",
+                options: ["2", "3", "4", "5"],
+                correct: 2
+            },
+            {
+                question: "Où se trouve le télescope TAROT en France ?",
+                options: ["Pic du Midi", "Calern", "Haute-Provence", "Marseille"],
+                correct: 1
+            },
+            {
+                question: "Quel est le nom du logiciel qui pilote les télescopes TAROT ?",
+                options: ["TAROT-OS", "PyROS", "RoboScope", "AutoTel"],
+                correct: 1
+            },
+            {
+                question: "Quelle est l'altitude du site TAROT au Chili ?",
+                options: ["1270m", "2400m", "1000m", "400m"],
+                correct: 1
+            },
+            {
+                question: "Le projet EU-SST concerne :",
+                options: [
+                    "L'étude des exoplanètes",
+                    "La surveillance de l'espace",
+                    "Les ondes gravitationnelles",
+                    "La météorologie spatiale"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qu'est-ce qu'un sursaut gamma (GRB) ?",
+                options: [
+                    "Une aurore boréale",
+                    "L'explosion d'une étoile massive",
+                    "Une éruption solaire",
+                    "La collision de deux galaxies"
+                ],
+                correct: 1
+            },
+            {
+                question: "Le framework utilisé pour PyROS est :",
+                options: ["Flask", "Django", "FastAPI", "Tornado"],
+                correct: 1
+            },
+            {
+                question: "Quel organisme français gère le réseau TAROT avec l'IRAP ?",
+                options: ["ESA", "CNRS", "CNES", "CEA"],
+                correct: 2
+            },
+            {
+                question: "Les télescopes TAROT observent principalement :",
+                options: [
+                    "Les planètes du système solaire",
+                    "Les objets transitoires et les satellites",
+                    "Les comètes uniquement",
+                    "La surface lunaire"
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let quizScore = 0;
+        let selectedAnswer = null;
+
+        function startQuiz() {
+            document.getElementById('quizStartScreen').style.display = 'none';
+            document.getElementById('quizArea').style.display = 'block';
+            currentQuestion = 0;
+            quizScore = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}/10`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectQuizOption(index, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById('nextBtn').classList.add('hidden');
+            selectedAnswer = null;
+            
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            document.getElementById('questionCard').style.animation = 'none';
+            setTimeout(() => {
+                document.getElementById('questionCard').style.animation = 'slideIn 0.5s ease';
+            }, 10);
+        }
+
+        function selectQuizOption(index, element) {
+            if (selectedAnswer !== null) return;
+            
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            selectedAnswer = index;
+            const question = questions[currentQuestion];
+            
+            setTimeout(() => {
+                document.querySelectorAll('.option').forEach((opt, i) => {
+                    if (i === question.correct) {
+                        opt.classList.add('correct');
+                    } else if (i === selectedAnswer && i !== question.correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedAnswer === question.correct) {
+                    quizScore++;
+                    createParticles(element);
+                }
+                
+                document.getElementById('nextBtn').classList.remove('hidden');
+            }, 500);
+        }
+
+        function createParticles(element) {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 8px;
+                    height: 8px;
+                    background: #10b981;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1000;
+                    animation: particle 1s ease-out forwards;
+                `;
+                
+                const rect = element.getBoundingClientRect();
+                particle.style.left = (rect.left + rect.width / 2) + 'px';
+                particle.style.top = (rect.top + rect.height / 2) + 'px';
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+            
+            if (!document.getElementById('particle-style')) {
+                const style = document.createElement('style');
+                style.id = 'particle-style';
+                style.textContent = `
+                    @keyframes particle {
+                        0% { 
+                            transform: scale(0) translate(0, 0); 
+                            opacity: 1; 
+                        }
+                        100% { 
+                            transform: scale(1) translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px); 
+                            opacity: 0; 
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quizArea').style.display = 'none';
+            document.getElementById('quizResultsScreen').style.display = 'block';
+            
+            document.getElementById('finalScore').textContent = `${quizScore}/10`;
+            
+            const starsContainer = document.getElementById('starsDisplay');
+            const starCount = Math.ceil((quizScore / 10) * 5);
+            starsContainer.innerHTML = '';
+            
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'star';
+                star.textContent = i < starCount ? '⭐' : '☆';
+                star.style.animationDelay = (i * 0.2) + 's';
+                starsContainer.appendChild(star);
+            }
+            
+            const badgeContainer = document.getElementById('badgeDisplay');
+            const messageContainer = document.getElementById('scoreMessage');
+            
+            if (quizScore >= 9) {
+                badgeContainer.innerHTML = '<div class="badge expert">🏆 Expert Spatial</div>';
+                messageContainer.innerHTML = '<p>Impressionnant ! Vous maîtrisez parfaitement le réseau TAROT et l\'astronomie !</p>';
+            } else if (quizScore >= 7) {
+                badgeContainer.innerHTML = '<div class="badge advanced">🥈 Astronome Avancé</div>';
+                messageContainer.innerHTML = '<p>Très bien ! Vous avez d\'excellentes connaissances spatiales.</p>';
+            } else if (quizScore >= 5) {
+                badgeContainer.innerHTML = '<div class="badge intermediate">🥉 Observateur Intermédiaire</div>';
+                messageContainer.innerHTML = '<p>Pas mal ! Continuez à explorer l\'univers TAROT.</p>';
+            } else {
+                badgeContainer.innerHTML = '<div class="badge beginner">🌟 Débutant Curieux</div>';
+                messageContainer.innerHTML = '<p>Un bon début ! Explorez davantage le site pour en apprendre plus.</p>';
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('quizResultsScreen').style.display = 'none';
+            document.getElementById('quizStartScreen').style.display = 'block';
+            currentQuestion = 0;
+            quizScore = 0;
+            selectedAnswer = null;
+        }
+    </script>
+</body>
+</html>

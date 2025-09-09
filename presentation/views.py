@@ -75,3 +75,10 @@ def contact(request):
         'current_page': 'contact'
     }
     return render(request, 'presentation/contact.html', context)
+
+def quiz(request):
+    context = {
+        'page_title': 'Quiz Spatial TAROT',
+        'current_page': 'quiz'
+    }
+    return render(request, 'presentation/quiz.html', context)
