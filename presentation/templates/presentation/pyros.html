@@ -1,0 +1,162 @@
+{% extends 'presentation/base.html' %}
+
+{% block content %}
+<h1>PyROS - Python Robotic Observatory System</h1>
+
+<div style="background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
+    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">
+        🐍 Le Cerveau du Réseau TAROT
+    </h2>
+    <p style="font-size: 1.1rem; opacity: 0.9;">
+        Logiciel de pilotage automatique des observatoires robotiques
+    </p>
+</div>
+
+<!-- Présentation générale -->
+<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+    <h2>Qu'est-ce que PyROS ?</h2>
+    <p>
+        PyROS (Python Robotic Observatory System) est un logiciel développé entièrement en Python 
+        qui pilote de manière autonome les télescopes du réseau TAROT. Il remplace progressivement 
+        l'ancien système sur les 4 observatoires.
+    </p>
+    <p>
+        Conçu de manière générique, PyROS peut piloter différents types d'observatoires avec des 
+        télescopes robotiques, en exécutant automatiquement les requêtes d'observation soumises par les scientifiques.
+    </p>
+</div>
+
+<!-- Architecture technique -->
+<div style="margin: 2rem 0;">
+    <h2>Architecture Technique</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 1.5rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <div style="font-size: 2rem; margin-right: 1rem;">🐍</div>
+                <h3 style="color: #2a5298; margin: 0;">Backend Python</h3>
+            </div>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                <li>Framework Django (MVC)</li>
+                <li>Base de données PostgreSQL</li>
+                <li>ORM (Object Relational Mapper)</li>
+                <li>Architecture orientée objets</li>
+                <li>Gestion des utilisateurs et sécurité</li>
+            </ul>
+        </div>
+
+        <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 1.5rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <div style="font-size: 2rem; margin-right: 1rem;">💻</div>
+                <h3 style="color: #2a5298; margin: 0;">Frontend Web</h3>
+            </div>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                <li>Templates Django</li>
+                <li>Framework Tailwind CSS</li>
+                <li>VueJS pour l'interactivité</li>
+                <li>HTMX et jQuery</li>
+                <li>WebSockets (temps réel)</li>
+            </ul>
+        </div>
+
+        <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 1.5rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <div style="font-size: 2rem; margin-right: 1rem;">📱</div>
+                <h3 style="color: #2a5298; margin: 0;">Interface Responsive</h3>
+            </div>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                <li>Compatible smartphone/tablette</li>
+                <li>Interface ergonomique</li>
+                <li>Design dynamique</li>
+                <li>Contrôle à distance</li>
+                <li>Visualisation en temps réel</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- Fonctionnalités principales -->
+<div style="background: white; border: 2px solid #2a5298; border-radius: 10px; padding: 2rem; margin: 2rem 0;">
+    <h2 style="text-align: center; color: #2a5298; margin-bottom: 2rem;">Fonctionnalités Principales</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">📋</div>
+            <h4>Planification</h4>
+            <p style="font-size: 0.9rem; color: #666;">Gestion automatique des requêtes d'observation scientifique</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔧</div>
+            <h4>Pilotage</h4>
+            <p style="font-size: 0.9rem; color: #666;">Contrôle des télescopes, caméras et instruments</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🌦️</div>
+            <h4>Surveillance</h4>
+            <p style="font-size: 0.9rem; color: #666;">Monitoring météo et mise en sécurité automatique</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚙️</div>
+            <h4>Administration</h4>
+            <p style="font-size: 0.9rem; color: #666;">Configuration des paramètres et gestion des utilisateurs</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">📊</div>
+            <h4>Visualisation</h4>
+            <p style="font-size: 0.9rem; color: #666;">Interface de suivi en temps réel de l'observatoire</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">📈</div>
+            <h4>Résultats</h4>
+            <p style="font-size: 0.9rem; color: #666;">Consultation et analyse des données d'observation</p>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Développement et déploiement -->
+<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+    <h2>Développement et Déploiement</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem;">
+        
+        <div>
+            <h4 style="color: #2a5298; margin-bottom: 1rem;">🏗️ Équipe de Développement</h4>
+            <ul style="font-size: 0.9rem; padding-left: 1.5rem;">
+                <li>Chef de projet logiciel</li>
+                <li>Développeurs full-stack</li>
+                <li>Responsable scientifique</li>
+                <li>Équipe CNES</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h4 style="color: #2a5298; margin-bottom: 1rem;">🚀 Déploiement</h4>
+            <ul style="font-size: 0.9rem; padding-left: 1.5rem;">
+                <li>Déploiement progressif sur les 4 sites</li>
+                <li>Tests systématiques</li>
+                <li>Documentation technique en anglais</li>
+                <li>Versionning sur GitLab</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div style="text-align: center; margin: 2rem 0;">
+    <a href="{% url 'presentation:sites' %}" 
+       style="background: #2a5298; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s; margin-right: 1rem;">
+        ← Voir les sites TAROT
+    </a>
+    <a href="{% url 'presentation:contact' %}" 
+       style="background: #6c757d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+        Contact →
+    </a>
+</div>
+{% endblock %}
