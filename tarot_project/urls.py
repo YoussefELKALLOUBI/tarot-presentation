@@ -23,5 +23,5 @@ urlpatterns = [
     path('', include('presentation.urls')),
 ]
 
-if not settings.DEBUG:
-    handler404 = 'presentation.views.custom_404_view'
+
+handler404 = 'presentation.views.custom_404_view'
