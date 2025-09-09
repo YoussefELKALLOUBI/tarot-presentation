@@ -1,10 +1,11 @@
 {% extends 'presentation/base.html' %}
+{% load static %}
 
 {% block content %}
 <h1>Bienvenue sur le réseau TAROT</h1>
 
 <div style="text-align: center; margin: 2rem 0;">
-    <img src="https://via.placeholder.com/600x300/334155/ffffff?text=Réseau+TAROT" alt="Réseau TAROT" style="max-width: 100%; height: auto; border-radius: 10px;">
+    <img src="{% static 'presentation/images/tarot_telescope.jpg' %}" alt="Réseau TAROT" style="max-width: 100%; height: auto; border-radius: 10px;">
 </div>
 
 <h2>Qu'est-ce que TAROT ?</h2>
