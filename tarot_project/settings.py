@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8swi!%j^6jxk*$qc%%q5&+2(no^p$hv!jx7^f167ewk1r1*fs3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://tarot-presentation.onrender.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'tarot-presentation.onrender.com']
 
 
 # Application definition
