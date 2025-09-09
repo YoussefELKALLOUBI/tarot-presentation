@@ -1,0 +1,111 @@
+{% extends 'presentation/base.html' %}
+
+{% block content %}
+<h1>Mission et Objectifs du Réseau TAROT</h1>
+
+<div style="background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
+    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">
+        Surveillance de l'Espace et Astronomie Transitoire
+    </h2>
+    <p style="font-size: 1.1rem; opacity: 0.9;">
+        Une mission double au service de la science et de la sécurité spatiale
+    </p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin: 2rem 0;">
+    
+    <!-- Mission 1: Surveillance Spatiale -->
+    <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; border-left: 5px solid #2a5298;">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; margin-right: 1rem;">🛰️</div>
+            <h3 style="color: #2a5298; margin: 0;">Surveillance Spatiale EU-SST</h3>
+        </div>
+        <p><strong>Objectif principal :</strong> Suivi des satellites géostationnaires</p>
+        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+            <li>Détection des débris spatiaux</li>
+            <li>Surveillance des objets en orbite géostationnaire</li>
+            <li>Contribution au projet européen EU-SST (European Space Surveillance and Tracking)</li>
+            <li>Protection des infrastructures spatiales critiques</li>
+        </ul>
+        <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+            <strong>Impact :</strong> Sécurisation de l'espace orbital pour les télécommunications et la navigation
+        </div>
+    </div>
+
+    <!-- Mission 2: Astronomie Transitoire -->
+    <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; border-left: 5px solid #2a5298;">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; margin-right: 1rem;">⚡</div>
+            <h3 style="color: #2a5298; margin: 0;">Astronomie Transitoire</h3>
+        </div>
+        <p><strong>Objectif principal :</strong> Observation rapide des phénomènes cosmiques</p>
+        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+            <li>Sursauts gamma (GRB - Gamma Ray Bursts)</li>
+            <li>Supernovaes et étoiles variables</li>
+            <li>Ondes gravitationnelles (suivi optique)</li>
+            <li>Neutrinos de haute énergie</li>
+        </ul>
+        <div style="background: #fff3e0; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+            <strong>Impact :</strong> Compréhension des phénomènes les plus énergétiques de l'Univers
+        </div>
+    </div>
+
+</div>
+
+<!-- Avantages du réseau -->
+<div style="background: white; border: 2px solid #2a5298; border-radius: 10px; padding: 2rem; margin: 2rem 0;">
+    <h2 style="text-align: center; color: #2a5298; margin-bottom: 2rem;">Avantages du Réseau Mondial</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🌍</div>
+            <h4>Couverture 24h/24</h4>
+            <p style="font-size: 0.9rem; color: #666;">Surveillance continue grâce à la répartition géographique</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+            <h4>Réaction Rapide</h4>
+            <p style="font-size: 0.9rem; color: #666;">Temps de réponse minimal pour les alertes</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🤖</div>
+            <h4>Automatisation</h4>
+            <p style="font-size: 0.9rem; color: #666;">Fonctionnement robotique sans intervention humaine</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔄</div>
+            <h4>Redondance</h4>
+            <p style="font-size: 0.9rem; color: #666;">Sécurité assurée par la multiplicité des sites</p>
+        </div>
+    </div>
+</div>
+
+<!-- Partenaires et contexte -->
+<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+    <h2>Contexte et Partenaires</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1rem;">
+        <div>
+            <h4 style="color: #2a5298;">CNES</h4>
+            <p style="font-size: 0.9rem;">Centre National d'Études Spatiales - Agence spatiale française</p>
+        </div>
+        <div>
+            <h4 style="color: #2a5298;">IRAP/CNRS</h4>
+            <p style="font-size: 0.9rem;">Institut de Recherche en Astrophysique et Planétologie</p>
+        </div>
+        <div>
+            <h4 style="color: #2a5298;">EU-SST</h4>
+            <p style="font-size: 0.9rem;">Projet européen de surveillance et suivi de l'espace</p>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 2rem 0;">
+    <a href="{% url 'presentation:pyros' %}" 
+       style="background: #2a5298; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+        Découvrir le logiciel PyROS →
+    </a>
+</div>
+{% endblock %}
