@@ -5,33 +5,33 @@
 
 <p>Le réseau TAROT est composé de 4 télescopes stratégiquement positionnés pour assurer une couverture optimale du ciel.</p>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+<div class="grid grid-2">
     {% for site in sites %}
-    <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <div style="text-align: center; margin-bottom: 1rem;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1e3c72, #2a5298); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1rem;">
+    <div class="card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1rem;">
                 🔭
             </div>
-            <h3 style="color: #2a5298; margin-bottom: 0.5rem;">{{ site.name }}</h3>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">{{ site.location }}</p>
+            <h3 style="margin-bottom: 0.5rem;">{{ site.name }}</h3>
+            <p style="color: #94a3b8; font-size: 0.9rem;">{{ site.location }}</p>
         </div>
         
         <div style="space-y: 0.5rem;">
-            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
                 <span style="font-weight: bold;">Coordonnées:</span>
                 <span>{{ site.coordinates }}</span>
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
                 <span style="font-weight: bold;">Altitude:</span>
                 <span>{{ site.altitude }}</span>
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
                 <span style="font-weight: bold;">Installation:</span>
                 <span>{{ site.year_installed }}</span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 0.3rem 0;">
                 <span style="font-weight: bold;">Status:</span>
-                <span style="background: {% if site.status == 'Opérationnel' %}#d4edda{% else %}#fff3cd{% endif %}; color: {% if site.status == 'Opérationnel' %}#155724{% else %}#856404{% endif %}; padding: 0.2rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">
+                <span class="{% if site.status == 'Opérationnel' %}badge-success{% else %}badge-warning{% endif %} badge">
                     {{ site.status }}
                 </span>
             </div>
@@ -40,11 +40,9 @@
     {% endfor %}
 </div>
 
-<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+<div class="card" style="margin: 2rem 0;">
     <h2>Couverture Géographique</h2>
-    <p>
-        Cette répartition géographique permet au réseau TAROT de :
-    </p>
+    <p>Cette répartition géographique permet au réseau TAROT de :</p>
     <ul style="margin: 1rem 0; padding-left: 2rem;">
         <li>Assurer une surveillance continue 24h/24</li>
         <li>Couvrir différentes zones du ciel selon les saisons</li>
@@ -54,12 +52,10 @@
 </div>
 
 <div style="text-align: center; margin: 2rem 0;">
-    <a href="{% url 'presentation:mission' %}" 
-       style="background: #2a5298; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s; margin-right: 1rem;">
+    <a href="{% url 'presentation:mission' %}" class="btn-modern" style="margin-right: 1rem;">
         En savoir plus sur la mission →
     </a>
-    <a href="{% url 'presentation:pyros' %}" 
-       style="background: #6c757d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+    <a href="{% url 'presentation:pyros' %}" class="btn-secondary">
         Découvrir PyROS →
     </a>
 </div>

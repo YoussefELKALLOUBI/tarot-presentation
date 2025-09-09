@@ -4,7 +4,7 @@
 <h1>Bienvenue sur le réseau TAROT</h1>
 
 <div style="text-align: center; margin: 2rem 0;">
-    <img src="https://via.placeholder.com/600x300/1e3c72/ffffff?text=Réseau+TAROT" alt="Réseau TAROT" style="max-width: 100%; height: auto; border-radius: 10px;">
+    <img src="https://via.placeholder.com/600x300/334155/ffffff?text=Réseau+TAROT" alt="Réseau TAROT" style="max-width: 100%; height: auto; border-radius: 10px;">
 </div>
 
 <h2>Qu'est-ce que TAROT ?</h2>
@@ -13,23 +13,23 @@
     répartis stratégiquement dans le monde pour assurer une surveillance continue du ciel.
 </p>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
-    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
+<div class="grid grid-4">
+    <div class="card">
         <h3>🔭 Surveillance Spatiale</h3>
         <p>Suivi des satellites géostationnaires dans le cadre du projet européen EU-SST</p>
     </div>
     
-    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
+    <div class="card">
         <h3>⚡ Objets Transitoires</h3>
         <p>Observation rapide des sursauts gamma, supernovaes et ondes gravitationnelles</p>
     </div>
     
-    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
+    <div class="card">
         <h3>🌍 Couverture Mondiale</h3>
         <p>4 sites répartis sur 3 continents pour une surveillance 24h/24</p>
     </div>
     
-    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
+    <div class="card">
         <h3>🤖 Automatisation</h3>
         <p>Télescopes entièrement robotisés pilotés par le logiciel PyROS</p>
     </div>
@@ -42,8 +42,7 @@
 </p>
 
 <div style="text-align: center; margin: 2rem 0;">
-    <a href="{% url 'presentation:sites' %}" 
-       style="background: #2a5298; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+    <a href="{% url 'presentation:sites' %}" class="btn-modern">
         Découvrir les sites TAROT →
     </a>
 </div>

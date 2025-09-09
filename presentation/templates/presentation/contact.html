@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Contact & Informations</h1>
 
-<div style="background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
+<div style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
     <h2 style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">
         📧 Projet d'Entretien
     </h2>
@@ -13,7 +13,7 @@
 </div>
 
 <!-- Informations du projet -->
-<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+<div class="card" style="margin: 2rem 0;">
     <h2>À propos de ce projet</h2>
     <p>
         Ce site web a été développé dans le cadre d'un entretien technique pour présenter 
@@ -21,25 +21,25 @@
         avec Django et l'architecture MVC.
     </p>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+    <div class="grid grid-2" style="margin-top: 2rem;">
         
-        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
-            <h4 style="color: #2a5298; margin-bottom: 1rem;">🛠️ Technologies Utilisées</h4>
+        <div class="card" style="border-left: 4px solid #3b82f6;">
+            <h4 style="color: #3b82f6; margin-bottom: 1rem;">🛠️ Technologies Utilisées</h4>
             <ul style="font-size: 0.9rem; padding-left: 1.5rem;">
                 <li>Django (Python)</li>
                 <li>HTML5 / CSS3</li>
                 <li>Architecture MVC</li>
                 <li>Design responsive</li>
-                <li>Navigation fluide</li>
+                <li>Effets spatiaux JavaScript</li>
             </ul>
         </div>
         
-        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2a5298;">
-            <h4 style="color: #2a5298; margin-bottom: 1rem;">✨ Fonctionnalités</h4>
+        <div class="card" style="border-left: 4px solid #06b6d4;">
+            <h4 style="color: #06b6d4; margin-bottom: 1rem;">✨ Fonctionnalités</h4>
             <ul style="font-size: 0.9rem; padding-left: 1.5rem;">
                 <li>Navigation entre pages</li>
                 <li>Templates modulaires</li>
-                <li>Design moderne</li>
+                <li>Design spatial moderne</li>
                 <li>Interface responsive</li>
                 <li>Code structuré</li>
             </ul>
@@ -51,13 +51,13 @@
 <!-- Contacts officiels -->
 <div style="margin: 2rem 0;">
     <h2>Contacts Officiels du Réseau TAROT</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+    <div class="grid grid-2">
         
-        <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 2rem;">
+        <div class="card">
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏢</div>
-                <h3 style="color: #2a5298; margin: 0;">IRAP/CNRS</h3>
-                <p style="color: #666; font-size: 0.9rem;">Institut de Recherche en Astrophysique et Planétologie</p>
+                <h3 style="margin: 0;">IRAP/CNRS</h3>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Institut de Recherche en Astrophysique et Planétologie</p>
             </div>
             <div style="font-size: 0.9rem; line-height: 1.6;">
                 <p><strong>Adresse :</strong><br>
@@ -70,11 +70,11 @@
             </div>
         </div>
 
-        <div style="background: white; border: 1px solid #ddd; border-radius: 10px; padding: 2rem;">
+        <div class="card">
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <div style="font-size: 3rem; margin-bottom: 0.5rem;">🚀</div>
-                <h3 style="color: #2a5298; margin: 0;">CNES</h3>
-                <p style="color: #666; font-size: 0.9rem;">Centre National d'Études Spatiales</p>
+                <h3 style="margin: 0;">CNES</h3>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Centre National d'Études Spatiales</p>
             </div>
             <div style="font-size: 0.9rem; line-height: 1.6;">
                 <p><strong>Rôle :</strong><br>
@@ -91,11 +91,11 @@
 </div>
 
 <!-- Informations techniques -->
-<div style="background: white; border: 2px solid #2a5298; border-radius: 10px; padding: 2rem; margin: 2rem 0;">
-    <h2 style="text-align: center; color: #2a5298; margin-bottom: 2rem;">Structure du Projet Django</h2>
+<div class="card" style="border: 2px solid #3b82f6; margin: 2rem 0;">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Structure du Projet Django</h2>
     
-    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
-        <pre style="margin: 0; white-space: pre-wrap;">
+    <div style="background: rgba(51, 65, 85, 0.6); padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; border: 1px solid rgba(100, 116, 139, 0.2);">
+        <pre style="margin: 0; white-space: pre-wrap; color: #e2e8f0;">
 tarot-presentation/
 ├── tarot_project/
 │   ├── settings.py
@@ -106,7 +106,7 @@ tarot-presentation/
 │   ├── urls.py           # Routage
 │   └── templates/
 │       └── presentation/
-│           ├── base.html      # Template de base
+│           ├── base.html      # Template spatial
 │           ├── home.html      # Page d'accueil
 │           ├── sites.html     # Sites TAROT
 │           ├── mission.html   # Mission
@@ -118,9 +118,9 @@ tarot-presentation/
 </div>
 
 <!-- Note sur le poste -->
-<div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
-    <h4 style="color: #856404; margin-bottom: 1rem;">💼 À propos du poste</h4>
-    <p style="color: #856404; font-size: 0.9rem; margin: 0;">
+<div style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+    <h4 style="color: #fbbf24; margin-bottom: 1rem;">💼 À propos du poste</h4>
+    <p style="color: #fbbf24; font-size: 0.9rem; margin: 0;">
         Le poste de "Développeur Web Full Stack pour le pilotage des télescopes du réseau TAROT" 
         est un contrat CDD de 12 mois à l'IRAP, dans le secteur PPST (Protection du Potentiel 
         Scientifique et Technique).
@@ -128,8 +128,7 @@ tarot-presentation/
 </div>
 
 <div style="text-align: center; margin: 2rem 0;">
-    <a href="{% url 'presentation:home' %}" 
-       style="background: #2a5298; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+    <a href="{% url 'presentation:home' %}" class="btn-modern">
         ← Retour à l'accueil
     </a>
 </div>
