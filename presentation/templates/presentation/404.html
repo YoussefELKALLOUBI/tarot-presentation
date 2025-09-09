@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page non trouvée - Réseau TAROT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e8e8e8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Étoiles en arrière-plan */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, white, transparent),
+                radial-gradient(1px 1px at 90px 40px, white, transparent),
+                radial-gradient(1px 1px at 130px 80px, white, transparent),
+                radial-gradient(2px 2px at 160px 30px, white, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 4s ease-in-out infinite alternate;
+            opacity: 0.3;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        .error-container {
+            text-align: center;
+            z-index: 10;
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .error-number {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5)); }
+            100% { filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.8)); }
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .telescope-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .btn-home {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-home:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(100, 116, 139, 0.3);
+            color: #e2e8f0;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            border: 1px solid rgba(100, 116, 139, 0.5);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(100, 116, 139, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .navigation-hint {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .navigation-hint h3 {
+            color: #3b82f6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .navigation-hint ul {
+            text-align: left;
+            color: #cbd5e1;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .navigation-hint li {
+            margin: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .navigation-hint li::before {
+            content: '🔭';
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Effet de météore pour l'animation */
+        .meteor {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #3b82f6;
+            animation: meteor-flight 3s linear infinite;
+        }
+        
+        @keyframes meteor-flight {
+            0% {
+                opacity: 0;
+                top: -10px;
+                left: 100%;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                top: 50%;
+                left: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="meteor"></div>
+    
+    <div class="error-container">
+        <div class="telescope-icon">🔭</div>
+        <div class="error-number">404</div>
+        <h1 class="error-title">Objet cosmique non détecté</h1>
+        <p class="error-message">
+            Nos télescopes TAROT n'ont pas pu localiser la page que vous recherchez dans l'espace-temps. 
+            Elle a peut-être été absorbée par un trou noir ou s'est perdue dans une autre galaxie.
+        </p>
+        
+        <div>
+            <a href="/" class="btn-home">🏠 Retour à la station TAROT</a>
+            <a href="/sites/" class="btn-secondary">🌍 Explorer les sites</a>
+        </div>
+        
+        <div class="navigation-hint">
+            <h3>Navigation recommandée :</h3>
+            <ul>
+                <li>Accueil - Présentation du réseau TAROT</li>
+                <li>Sites - Les 4 observatoires dans le monde</li>
+                <li>Mission - Objectifs et technologies</li>
+                <li>PyROS - Système de contrôle robotique</li>
+                <li>Contact - Informations du projet</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Effet de météore automatique
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.className = 'meteor';
+            meteor.style.top = Math.random() * 20 + '%';
+            meteor.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(meteor);
+            
+            setTimeout(() => {
+                if (meteor.parentNode) {
+                    meteor.parentNode.removeChild(meteor);
+                }
+            }, 3000);
+        }
+        
+        // Créer des météores périodiquement
+        setInterval(createMeteor, 2000);
+        
+        // Créer un météore immédiatement
+        createMeteor();
+    </script>
+</body>
+</html>

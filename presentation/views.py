@@ -82,3 +82,7 @@ def quiz(request):
         'current_page': 'quiz'
     }
     return render(request, 'presentation/quiz.html', context)
+
+def custom_404_view(request, exception):
+    """Vue personnalisée pour les erreurs 404"""
+    return render(request, 'presentation/404.html', status=404)
