@@ -52,11 +52,12 @@
 </div>
 
 <div style="text-align: center; margin: 2rem 0;">
+    <a href="{% url 'presentation:home' %}" class="btn-modern" style="margin-right: 1rem;">
+        ← Accueil
+    </a>
     <a href="{% url 'presentation:mission' %}" class="btn-modern" style="margin-right: 1rem;">
         En savoir plus sur la mission →
     </a>
-    <a href="{% url 'presentation:pyros' %}" class="btn-secondary">
-        Découvrir PyROS →
-    </a>
 </div>
+
 {% endblock %}
