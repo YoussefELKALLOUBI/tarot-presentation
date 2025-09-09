@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ page_title }}{% endblock %}</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,10 +14,31 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            color: #e8e8e8;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+
+        /* Effet d'étoiles subtil en arrière-plan */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ffffff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         .container {
@@ -24,11 +47,16 @@
             padding: 0 20px;
         }
 
+        /* Header moderne et épuré */
         header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .header-content {
@@ -38,78 +66,242 @@
         }
 
         .logo h1 {
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
 
         .logo p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            letter-spacing: 0.5px;
         }
 
+        /* Navigation épurée */
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 0.5rem;
         }
 
         nav a {
-            color: white;
+            color: #cbd5e1;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
         }
 
-        nav a:hover,
+        nav a:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
         nav a.active {
-            background-color: rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
+        /* Contenu principal */
         main {
-            min-height: calc(100vh - 140px);
-            padding: 2rem 0;
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem 0;
         }
 
         .content {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-
+        /* Typographie élégante */
         h1, h2, h3 {
-            margin-bottom: 1rem;
-            color: #2a5298;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        h1 { 
+            font-size: 3rem; 
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 { 
+            font-size: 2rem; 
+            color: #f1f5f9;
+        }
+
+        h3 { 
+            font-size: 1.5rem; 
+            color: #e2e8f0;
         }
 
         p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+            line-height: 1.7;
         }
 
+        /* Boutons modernes */
+        .btn-modern {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 12px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(100, 116, 139, 0.2);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(100, 116, 139, 0.3);
+            box-shadow: 0 8px 25px rgba(100, 116, 139, 0.2);
+        }
+
+        /* Cards élégantes */
+        .card {
+            background: rgba(51, 65, 85, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Grid système */
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(100, 116, 139, 0.2);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+
+            .logo h1 {
+                font-size: 1.8rem;
             }
 
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 1rem;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
             }
 
             .container {
-                padding: 0 10px;
+                padding: 0 15px;
             }
+
+            .content {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations subtiles */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Badge status */
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .badge-warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
         }
     </style>
 </head>
@@ -136,7 +328,7 @@
 
     <main>
         <div class="container">
-            <div class="content">
+            <div class="content fade-in">
                 {% block content %}
                 {% endblock %}
             </div>
@@ -145,8 +337,114 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 CNRS/IRAP - Réseau TAROT. Projet d'entretien.</p>
+            <p>&copy; 2025 CNRS/IRAP - Réseau TAROT • Projet d'entretien technique</p>
         </div>
     </footer>
+
+    <script>
+    // Effets spatiaux pour le site TAROT
+    function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.style.cssText = `
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            z-index: 1;
+        `;
+        
+        const startX = window.innerWidth + 30;
+        const startY = Math.random() * (window.innerHeight / 2);
+        const endX = -30;
+        const endY = window.innerHeight - Math.random() * (window.innerHeight / 2);
+        
+        meteor.style.left = startX + 'px';
+        meteor.style.top = startY + 'px';
+        document.body.appendChild(meteor);
+        
+        const duration = 5000;
+        const startTime = Date.now();
+        
+        function animateMeteor() {
+            const elapsed = Date.now() - startTime;
+            const progress = elapsed / duration;
+            
+            if (progress >= 1) {
+                meteor.remove();
+                return;
+            }
+            
+            const currentX = startX + (endX - startX) * progress;
+            const currentY = startY + (endY - startY) * progress;
+            
+            meteor.style.left = currentX + 'px';
+            meteor.style.top = currentY + 'px';
+            meteor.style.opacity = progress < 0.1 ? progress * 10 : (progress > 0.9 ? (1 - progress) * 10 : 0.8);
+            
+            requestAnimationFrame(animateMeteor);
+        }
+        
+        requestAnimationFrame(animateMeteor);
+    }
+
+    function createExplosion() {
+        const explosion = document.createElement('div');
+        explosion.style.cssText = `
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: rgba(0, 255, 255, 0.8);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        `;
+        
+        const x = 50 + Math.random() * (window.innerWidth - 100);
+        const y = 50 + Math.random() * (window.innerHeight - 100);
+        
+        explosion.style.left = x + 'px';
+        explosion.style.top = y + 'px';
+        document.body.appendChild(explosion);
+        
+        const duration = 2500;
+        const startTime = Date.now();
+        const startSize = 15;
+        const endSize = 60;
+        
+        function animateExplosion() {
+            const elapsed = Date.now() - startTime;
+            const progress = elapsed / duration;
+            
+            if (progress >= 1) {
+                explosion.remove();
+                return;
+            }
+            
+            const currentSize = startSize + (endSize - startSize) * progress;
+            const opacity = (1 - progress) * 0.6;
+            
+            explosion.style.width = currentSize + 'px';
+            explosion.style.height = currentSize + 'px';
+            explosion.style.opacity = opacity;
+            
+            requestAnimationFrame(animateExplosion);
+        }
+        
+        requestAnimationFrame(animateExplosion);
+    }
+
+    // Effets automatiques
+    setInterval(createMeteor, 12000); // Toutes les 12 secondes
+    setInterval(createExplosion, 8000); // Toutes les 8 secondes
+
+    // Démarrage après chargement
+    setTimeout(() => {
+        createMeteor();
+        createExplosion();
+    }, 3000);
+    </script>
+
 </body>
 </html>
