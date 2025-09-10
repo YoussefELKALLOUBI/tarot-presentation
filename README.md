@@ -70,4 +70,3 @@ Ce projet a été développé dans le cadre d'un entretien technique pour démon
 ---
 
 **Auteur** : Youssef ELKALLOUBI  
-**Repository** : [https://github.com/YoussefELKALLOUBI/tarot-presentation](https://github.com/YoussefELKALLOUBI/tarot-presentation)
