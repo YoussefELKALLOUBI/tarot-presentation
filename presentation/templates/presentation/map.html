@@ -1,0 +1,376 @@
+{% extends "presentation/base.html" %}
+
+{% block content %}
+<style>
+    .tarot-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .tarot-title {
+        text-align: center;
+        background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .world-map {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background: linear-gradient(135deg, #1e3a5f, #2d5aa0);
+        border-radius: 15px;
+        overflow: visible;
+        border: 2px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .site-marker {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: radial-gradient(circle, #00ffff, #0088cc);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.3);
+        animation: pulse 3s infinite;
+        z-index: 100;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .site-marker:hover {
+        transform: scale(1.4);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.9), 0 0 40px rgba(0, 255, 255, 0.5);
+    }
+    
+    @keyframes pulse {
+        0%, 100% { 
+            opacity: 1; 
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        50% { 
+            opacity: 0.8; 
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 0 0 40px rgba(0, 255, 255, 0.5);
+        }
+    }
+    
+    .site-info {
+        position: absolute;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+        border: 2px solid rgba(59, 130, 246, 0.8);
+        border-radius: 12px;
+        padding: 1.2rem;
+        min-width: 300px;
+        max-width: 380px;
+        display: none;
+        z-index: 1000;
+        backdrop-filter: blur(20px);
+        color: #e8e8e8;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 5px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .site-info h3 {
+        color: #00ffff;
+        margin: 0 0 0.8rem 0;
+        font-size: 1.3rem;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    
+    .site-info p {
+        margin: 0.4rem 0;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .time-display {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, rgba(51, 65, 85, 0.8), rgba(71, 85, 105, 0.6));
+        border-radius: 12px;
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        color: #e8e8e8;
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Continents avec formes réalistes */
+    .continent {
+        position: absolute;
+        background: linear-gradient(135deg, #2d5a27, #4a7c59);
+        opacity: 0.8;
+        z-index: 1;
+    }
+    
+    /* Amérique du Nord */
+    .north-america {
+        top: 15%;
+        left: 8%;
+        width: 25%;
+        height: 35%;
+        clip-path: polygon(20% 0%, 85% 10%, 95% 30%, 90% 60%, 70% 80%, 30% 85%, 10% 70%, 0% 40%, 5% 20%);
+    }
+    
+    /* Amérique du Sud */
+    .south-america {
+        top: 45%;
+        left: 15%;
+        width: 15%;
+        height: 40%;
+        clip-path: polygon(30% 0%, 70% 5%, 85% 25%, 90% 50%, 80% 80%, 60% 95%, 40% 90%, 20% 70%, 15% 40%, 25% 15%);
+    }
+    
+    /* Europe */
+    .europe {
+        top: 18%;
+        left: 42%;
+        width: 18%;
+        height: 25%;
+        clip-path: polygon(0% 40%, 20% 20%, 40% 15%, 70% 25%, 85% 40%, 90% 60%, 75% 80%, 50% 85%, 25% 75%, 10% 60%);
+    }
+    
+    /* Afrique */
+    .africa {
+        top: 25%;
+        left: 45%;
+        width: 16%;
+        height: 50%;
+        clip-path: polygon(25% 0%, 75% 5%, 85% 20%, 90% 40%, 85% 65%, 75% 85%, 60% 95%, 40% 90%, 30% 75%, 20% 50%, 15% 25%);
+    }
+    
+    /* Asie */
+    .asia {
+        top: 10%;
+        left: 58%;
+        width: 35%;
+        height: 45%;
+        clip-path: polygon(0% 30%, 15% 15%, 35% 10%, 60% 5%, 80% 15%, 95% 25%, 90% 45%, 85% 65%, 70% 80%, 45% 85%, 25% 75%, 10% 60%, 5% 45%);
+    }
+    
+    /* Australie */
+    .australia {
+        top: 65%;
+        left: 75%;
+        width: 12%;
+        height: 15%;
+        clip-path: polygon(10% 25%, 30% 15%, 70% 20%, 90% 40%, 85% 70%, 60% 85%, 30% 80%, 15% 60%);
+    }
+    
+    /* Groenland */
+    .greenland {
+        top: 8%;
+        left: 25%;
+        width: 8%;
+        height: 12%;
+        clip-path: polygon(20% 10%, 60% 0%, 80% 20%, 85% 50%, 70% 80%, 40% 85%, 20% 70%, 15% 40%);
+    }
+    
+    .status-operational { 
+        color: #4ade80; 
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+    }
+    .status-recent { 
+        color: #fbbf24; 
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
+    }
+    
+    /* Flèche pointant vers le marqueur */
+    .site-info::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-top-color: rgba(59, 130, 246, 0.8);
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Lignes de latitude/longitude subtiles */
+    .grid-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        z-index: 0;
+    }
+    
+    .grid-line {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .lat-line {
+        width: 100%;
+        height: 1px;
+    }
+    
+    .lng-line {
+        width: 1px;
+        height: 100%;
+    }
+</style>
+
+<div class="tarot-container">
+    <h1 class="tarot-title">🌍 Réseau TAROT - Couverture Mondiale</h1>
+    
+    <div class="time-display">
+        <h3>🕐 Heure UTC : <span id="utc-time"></span></h3>
+        <p>⏰ Suivi des télescopes TAROT en temps réel</p>
+    </div>
+    
+    <div class="world-map">
+        <!-- Grille géographique subtile -->
+        <div class="grid-lines">
+            <div class="grid-line lat-line" style="top: 20%;"></div>
+            <div class="grid-line lat-line" style="top: 40%;"></div>
+            <div class="grid-line lat-line" style="top: 60%;"></div>
+            <div class="grid-line lat-line" style="top: 80%;"></div>
+            <div class="grid-line lng-line" style="left: 20%;"></div>
+            <div class="grid-line lng-line" style="left: 40%;"></div>
+            <div class="grid-line lng-line" style="left: 60%;"></div>
+            <div class="grid-line lng-line" style="left: 80%;"></div>
+        </div>
+        
+        <!-- Continents avec formes réalistes -->
+        <div class="continent north-america"></div>
+        <div class="continent south-america"></div>
+        <div class="continent europe"></div>
+        <div class="continent africa"></div>
+        <div class="continent asia"></div>
+        <div class="continent australia"></div>
+        <div class="continent greenland"></div>
+        
+        <!-- Sites TAROT - Générés dynamiquement -->
+        {% for site in sites %}
+        <div class="site-marker" 
+             style="top: {{ site.position.top }}; left: {{ site.position.left }};" 
+             data-site="{{ forloop.counter0 }}"
+             data-timezone="{{ site.timezone }}"
+             title="{{ site.name }}"></div>
+        {% endfor %}
+        
+        <!-- Info panels - Générés dynamiquement -->
+        {% for site in sites %}
+        <div class="site-info" id="info-{{ forloop.counter0 }}">
+            <h3>{{ site.flag }} {{ site.name }}</h3>
+            <p><strong>📍 Localisation :</strong> {{ site.location }}</p>
+            <p><strong>🌐 Coordonnées :</strong> {{ site.coordinates }}</p>
+            <p><strong>🏔️ Altitude :</strong> {{ site.altitude }}</p>
+            <p><strong>🔭 Télescope :</strong> {{ site.telescope|default:"T25cm (f/3.5)" }}</p>
+            <p><strong>⚡ Status :</strong> 
+                <span class="{% if site.status == 'Opérationnel' %}status-operational{% else %}status-recent{% endif %}">
+                    {{ site.status }}
+                </span>
+            </p>
+            <p><strong>🕐 Heure locale :</strong> <span id="time-{{ forloop.counter0 }}"></span></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    // Récupération des données des sites depuis Django
+    const sites = {{ sites|safe }};
+    
+    // Fonction pour positionner intelligemment les infos
+    function positionInfoPanel(marker, info) {
+        const mapRect = marker.closest('.world-map').getBoundingClientRect();
+        const markerRect = marker.getBoundingClientRect();
+        
+        // Position relative au marqueur dans la carte
+        const markerX = markerRect.left - mapRect.left + 8; // 8px = demi-largeur du marqueur
+        const markerY = markerRect.top - mapRect.top + 8;   // 8px = demi-hauteur du marqueur
+        
+        // Dimensions de l'info panel
+        info.style.display = 'block';
+        const infoWidth = info.offsetWidth;
+        const infoHeight = info.offsetHeight;
+        
+        // Calculer la position optimale
+        let left = markerX - (infoWidth / 2);
+        let top = markerY - infoHeight - 25; // 25px d'espace au-dessus du marqueur
+        
+        // Ajustements pour éviter de sortir de la carte
+        const mapWidth = mapRect.width;
+        const mapHeight = mapRect.height;
+        
+        // Ajustement horizontal
+        if (left < 10) {
+            left = 10;
+        } else if (left + infoWidth > mapWidth - 10) {
+            left = mapWidth - infoWidth - 10;
+        }
+        
+        // Ajustement vertical - si pas de place au-dessus, mettre en dessous
+        if (top < 10) {
+            top = markerY + 35; // 35px en dessous du marqueur
+        }
+        
+        // Si toujours pas assez de place verticalement
+        if (top + infoHeight > mapHeight - 10) {
+            top = mapHeight - infoHeight - 10;
+        }
+        
+        info.style.left = left + 'px';
+        info.style.top = top + 'px';
+    }
+    
+    // Gestion des clics sur les sites
+    document.querySelectorAll('.site-marker').forEach((marker, index) => {
+        marker.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Masquer toutes les infos
+            document.querySelectorAll('.site-info').forEach(info => {
+                info.style.display = 'none';
+            });
+            
+            // Afficher et positionner l'info du site cliqué
+            const info = document.getElementById(`info-${index}`);
+            positionInfoPanel(marker, info);
+        });
+    });
+    
+    // Fermer les infos en cliquant ailleurs
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.site-marker') && !e.target.closest('.site-info')) {
+            document.querySelectorAll('.site-info').forEach(info => {
+                info.style.display = 'none';
+            });
+        }
+    });
+    
+    // Mise à jour des heures
+    function updateTime() {
+        const now = new Date();
+        
+        // Mise à jour de l'heure UTC
+        const utcTimeElement = document.getElementById('utc-time');
+        if (utcTimeElement) {
+            utcTimeElement.textContent = now.toISOString().substr(11, 8) + ' UTC';
+        }
+        
+        // Heures locales des sites - utilise les données Django
+        sites.forEach((site, index) => {
+            const element = document.getElementById(`time-${index}`);
+            if (element) {
+                const localTime = new Date(now.getTime() + site.timezone * 3600000);
+                element.textContent = localTime.toTimeString().substr(0, 8);
+            }
+        });
+    }
+    
+    // Mise à jour toutes les secondes
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>
+{% endblock %}s

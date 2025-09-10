@@ -9,5 +9,6 @@ urlpatterns = [
     path('mission/', views.mission, name='mission'),
     path('pyros/', views.pyros_software, name='pyros'),
     path('quiz/', views.quiz, name='quiz'),
+    path('map/', views.tarot_map_view, name='map'),
     path('contact/', views.contact, name='contact'),
 ]
