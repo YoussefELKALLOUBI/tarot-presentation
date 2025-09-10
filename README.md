@@ -53,19 +53,12 @@ docker-compose up --build
 
 - **Framework** : Django (architecture MVC)
 - **Frontend** : HTML, CSS, JavaScript
-- **Base de données** : Aucune (projet statique)
+- **Base de données** : Aucune
 - **Déploiement** : Render.com
 
 ## 🔧 Test de la gestion 404
 
 Testez la gestion des erreurs 404 en accédant à : `votre-url/adressenonexistante`
-
-## 📝 Notes
-
-Ce projet a été développé dans le cadre d'un entretien technique pour démontrer :
-- Maîtrise de Django et du pattern MVC
-- Capacité à créer une application web fonctionnelle
-- Déploiement et mise en production
 
 ---
 
